@@ -1,0 +1,446 @@
+/* ==============================
+   GLOBAL RESET
+============================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #101210;
+}
+
+
+/* ==============================
+   MAIN CONTAINER
+============================== */
+
+.game-container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #101210;
+  padding: 25px 15px;
+}
+
+
+/* ==============================
+   GAME CARD
+============================== */
+
+.game-card {
+  width: 350px;
+  max-width: 100%;
+  padding: 30px 20px 25px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: #070907;
+
+  border: 2px solid #292e2a;
+  border-radius: 13px;
+
+  box-shadow:
+    0 0 20px rgba(0, 255, 100, 0.06),
+    0 0 40px rgba(0, 0, 0, 0.5),
+    inset 0 0 20px rgba(0, 0, 0, 0.8);
+
+  transition: 0.3s ease;
+}
+
+
+/* ==============================
+   GAME TITLE
+============================== */
+
+.game-title {
+  color: #00ff48;
+
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: 2px;
+
+  margin-bottom: 25px;
+
+  text-align: center;
+
+  text-shadow:
+    0 0 5px #00ff48,
+    0 0 12px rgba(0, 255, 72, 0.7);
+
+  animation: titleGlow 2s infinite alternate;
+}
+
+.title-icon {
+  display: inline-block;
+  font-size: 32px;
+  margin-right: 8px;
+
+  animation: snakeIcon 2s infinite ease-in-out;
+}
+
+
+/* ==============================
+   GAME BOARD
+============================== */
+
+.game-board {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+
+  position: relative;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle,
+      #14251a 0%,
+      #101a13 65%,
+      #0b120d 100%
+    );
+
+  border: 2px solid #353b36;
+
+  box-shadow:
+    inset 0 0 20px rgba(0, 0, 0, 0.8),
+    0 0 10px rgba(0, 255, 100, 0.05);
+}
+
+
+/* ==============================
+   SNAKE IMAGE
+============================== */
+
+.snake-image {
+  position: absolute;
+
+  width: 10%;
+  height: 10%;
+
+  object-fit: contain;
+
+  z-index: 2;
+
+  pointer-events: none;
+
+  transform-origin: center center;
+
+  filter:
+    drop-shadow(0 0 4px #00ff75)
+    drop-shadow(0 0 8px rgba(0, 255, 117, 0.5));
+
+  transition:
+    left 0.1s linear,
+    top 0.1s linear,
+    transform 0.1s ease;
+}
+
+
+/* ==============================
+   FOOD
+============================== */
+
+.food {
+  position: absolute;
+
+  width: 5%;
+  height: 5%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 1;
+}
+
+.food span {
+  display: block;
+
+  width: 75%;
+  height: 75%;
+
+  background: #ff3030;
+
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 5px #ff3030,
+    0 0 12px #ff3030,
+    0 0 20px rgba(255, 0, 0, 0.6);
+
+  animation: foodPulse 0.8s infinite alternate;
+}
+
+
+/* ==============================
+   START MESSAGE
+============================== */
+
+.start-message {
+  position: absolute;
+
+  left: 50%;
+  bottom: 15px;
+
+  transform: translateX(-50%);
+
+  width: max-content;
+
+  color: #85ffad;
+
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 2px;
+
+  opacity: 0.65;
+
+  z-index: 3;
+
+  animation: messageBlink 1.5s infinite;
+}
+
+
+/* ==============================
+   SCORE AND BUTTON
+============================== */
+
+.game-controls {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 20px;
+
+  padding: 0 10px;
+}
+
+.game-controls h3 {
+  color: #ffffff;
+
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.game-controls h3 span {
+  color: #00ff75;
+
+  text-shadow: 0 0 8px #00ff75;
+}
+
+
+/* ==============================
+   RESTART BUTTON
+============================== */
+
+.game-controls button {
+  background: #df3329;
+
+  color: #ffffff;
+
+  border: 1px solid #ff7770;
+
+  border-radius: 5px;
+
+  padding: 10px 22px;
+
+  font-size: 14px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+
+  box-shadow: 0 0 5px rgba(255, 50, 40, 0.2);
+}
+
+.game-controls button:hover {
+  background: #ff493c;
+
+  transform: scale(1.08);
+
+  box-shadow:
+    0 0 10px #ff493c,
+    0 0 18px rgba(255, 73, 60, 0.4);
+}
+
+.game-controls button:active {
+  transform: scale(0.95);
+}
+
+
+/* ==============================
+   GAME OVER
+============================== */
+
+.game-over {
+  margin-top: 20px;
+
+  padding: 9px 22px;
+
+  color: #ffffff;
+
+  font-size: 20px;
+  font-weight: 900;
+
+  letter-spacing: 2px;
+
+  text-align: center;
+
+  border: 2px solid #00ff75;
+
+  border-radius: 7px;
+
+  background: rgba(0, 255, 100, 0.04);
+
+  box-shadow:
+    0 0 8px #00ff75,
+    inset 0 0 10px rgba(0, 255, 117, 0.1);
+
+  animation: gameOverGlow 1s infinite alternate;
+}
+
+
+/* ==============================
+   ANIMATIONS
+============================== */
+
+@keyframes titleGlow {
+  from {
+    text-shadow: 0 0 5px #00ff48;
+  }
+
+  to {
+    text-shadow:
+      0 0 12px #00ff48,
+      0 0 25px #00ff48;
+  }
+}
+
+@keyframes snakeIcon {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateX(5px) rotate(8deg);
+  }
+
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+}
+
+@keyframes foodPulse {
+  from {
+    transform: scale(0.75);
+
+    box-shadow: 0 0 5px #ff3030;
+  }
+
+  to {
+    transform: scale(1.2);
+
+    box-shadow:
+      0 0 10px #ff3030,
+      0 0 20px red;
+  }
+}
+
+@keyframes gameOverGlow {
+  from {
+    box-shadow:
+      0 0 5px #00ff75,
+      inset 0 0 5px rgba(0, 255, 117, 0.1);
+  }
+
+  to {
+    box-shadow:
+      0 0 18px #00ff75,
+      inset 0 0 15px rgba(0, 255, 117, 0.2);
+  }
+}
+
+@keyframes messageBlink {
+  0%, 100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+
+/* ==============================
+   RESPONSIVE DESIGN
+============================== */
+
+@media (max-width: 480px) {
+
+  .game-container {
+    padding: 15px;
+  }
+
+  .game-card {
+    width: 330px;
+    padding: 25px 15px;
+  }
+
+  .game-title {
+    font-size: 22px;
+  }
+
+  .title-icon {
+    font-size: 27px;
+  }
+
+  .game-controls h3 {
+    font-size: 16px;
+  }
+
+  .game-controls button {
+    padding: 9px 18px;
+  }
+
+  .game-over {
+    font-size: 18px;
+  }
+}
+
+@media (max-height: 550px) {
+  .game-container {
+    padding: 15px;
+  }
+
+  .game-card {
+    padding: 15px;
+  }
+
+  .game-title {
+    margin-bottom: 12px;
+    font-size: 20px;
+  }
+
+  .game-board {
+    width: min(60vw, 300px);
+  }
+}
+
+
